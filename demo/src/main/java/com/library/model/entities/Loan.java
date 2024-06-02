@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class Loan {
     private Integer id;
-    private Integer idUser;
-    private Integer idBook;
+    private User user;
+    private Book book;
     private LocalDate loanDate;
     private LocalDate estimatedDate;
 
     public Loan() {}
 
-    public Loan(Integer id, Integer idUser, Integer idBook, LocalDate loanDate, LocalDate estimatedDate) {
+    public Loan(Integer id, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
         this.id = id;
-        this.idUser = idUser;
-        this.idBook = idBook;
+        this.user = user;
+        this.book = book;
         this.loanDate = loanDate;
         this.estimatedDate = estimatedDate;
     }
@@ -28,20 +28,20 @@ public class Loan {
         this.id = id;
     }
 
-    public Integer getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getIdBook() {
-        return idBook;
+    public Book getBook() {
+        return book;
     }
 
-    public void setIdBook(Integer idBook) {
-        this.idBook = idBook;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public LocalDate getLoanDate() {

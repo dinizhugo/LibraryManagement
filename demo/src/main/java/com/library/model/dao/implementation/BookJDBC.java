@@ -157,7 +157,5 @@ public class BookJDBC implements GenericDao<Book> {
         currentBook.setCategory(resultSet.getString("categoria"));
         currentBook.setPublicationDate(resultSet.getDate("data_publicacao").toLocalDate());
         return currentBook;
-
-
     }
 }
