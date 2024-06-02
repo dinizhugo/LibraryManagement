@@ -4,34 +4,33 @@ import com.library.database.DB;
 import com.library.database.DbException;
 import com.library.model.dao.GenericDao;
 import com.library.model.entities.Book;
+import com.library.model.entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookJDBC implements GenericDao<Book> {
+public class UserJDBC implements GenericDao<User> {
 
     private final Connection connection;
 
-    public BookJDBC(Connection connection) {
+    public UserJDBC(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public void insert(Book obj) {
+    public void insert(User obj) {
         PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "INSERT INTO books "
-                    +   "(titulo, autor, categoria, data_publicacao, editora, quantidade)"
-                    +   "VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, obj.getTitle());
-            preparedStatement.setString(2, obj.getAuthor());
-            preparedStatement.setString(3, obj.getCategory());
-            preparedStatement.setDate(4, java.sql.Date.valueOf(obj.getPublicationDate()));
-            preparedStatement.setString(5, obj.getPublishingCompany());
-            preparedStatement.setInt(6, obj.getAmount());
+                    "INSERT INTO users "
+                            +   "(name, email, phone, address)"
+                            +   "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, obj.getName());
+            preparedStatement.setString(2, obj.getEmail());
+            preparedStatement.setString(3, obj.getPhone());
+            preparedStatement.setString(4, obj.getAddress());
 
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -54,22 +53,19 @@ public class BookJDBC implements GenericDao<Book> {
     }
 
     @Override
-    public void update(Book obj) {
+    public void update(User obj) {
         PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "UPDATE books "
-                    + "SET (titulo = ?, autor = ?, categoria = ?, data_publicacao = ?, editora = ?, quantidade = ?) "
-                    + "WHERE id = ?");
-            preparedStatement.setString(1, obj.getTitle());
-            preparedStatement.setString(2, obj.getAuthor());
-            preparedStatement.setString(3, obj.getCategory());
-            preparedStatement.setDate(4, java.sql.Date.valueOf(obj.getPublicationDate()));
-            preparedStatement.setString(5, obj.getPublishingCompany());
-            preparedStatement.setInt(6, obj.getAmount());
-            preparedStatement.setInt(7, obj.getId());
-
+                    "UPDATE users "
+                            + "SET (name = ?, email = ?, phone = ?, address = ?) "
+                            + "WHERE id = ?");
+            preparedStatement.setString(1, obj.getName());
+            preparedStatement.setString(2, obj.getEmail());
+            preparedStatement.setString(3, obj.getPhone());
+            preparedStatement.setString(4, obj.getAddress());
+            preparedStatement.setInt(5, obj.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -85,7 +81,7 @@ public class BookJDBC implements GenericDao<Book> {
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "DELETE FROM books " +
+                    "DELETE FROM users " +
                             "WHERE id = ?"
             );
 
@@ -99,20 +95,20 @@ public class BookJDBC implements GenericDao<Book> {
     }
 
     @Override
-    public Book findById(Integer id) {
+    public User findById(Integer id) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM books " +
+                    "SELECT * FROM users " +
                             "WHERE Id = ?");
 
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                return instantiateBook(resultSet);
+                return instantiateUser(resultSet);
             }
             return null;
         } catch (SQLException e) {
@@ -124,21 +120,21 @@ public class BookJDBC implements GenericDao<Book> {
     }
 
     @Override
-    public List<Book> findAll() {
+    public List<User> findAll() {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM books");
+            preparedStatement = connection.prepareStatement("SELECT * FROM users");
             resultSet = preparedStatement.executeQuery();
 
-            List<Book> books = new ArrayList<>();
+            List<User> users = new ArrayList<>();
 
             while (resultSet.next()) {
-                Book book = instantiateBook(resultSet);
-                books.add(book);
+                User user = instantiateUser(resultSet);
+                users.add(user);
             }
-            return books;
+            return users;
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -147,17 +143,13 @@ public class BookJDBC implements GenericDao<Book> {
         }
     }
 
-    private Book instantiateBook(ResultSet resultSet) throws SQLException {
-        Book currentBook = new Book();
-        currentBook.setId(resultSet.getInt("id"));
-        currentBook.setTitle(resultSet.getString("titulo"));
-        currentBook.setAuthor(resultSet.getString("autor"));
-        currentBook.setPublishingCompany(resultSet.getString("editora"));
-        currentBook.setAmount(resultSet.getInt("quantidade"));
-        currentBook.setCategory(resultSet.getString("categoria"));
-        currentBook.setPublicationDate(resultSet.getDate("data_publicacao").toLocalDate());
-        return currentBook;
-
-
+    private User instantiateUser(ResultSet resultSet) throws SQLException {
+        User currentUser = new User();
+        currentUser.setId(resultSet.getInt("id"));
+        currentUser.setName(resultSet.getString("name"));
+        currentUser.setEmail(resultSet.getString("email"));
+        currentUser.setPhone(resultSet.getString("phone"));
+        currentUser.setAddress(resultSet.getString("address"));
+        return currentUser;
     }
 }
