@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class Devolution {
     private Integer id;
-    private Integer loanId;
+    private Loan loan;
     private LocalDate returnDate;
     private Double trafficTicket;
 
     public Devolution() {}
 
-    public Devolution(Integer id, Integer loanId, LocalDate returnDate, Double trafficTicket) {
+    public Devolution(Integer id, Loan loan, LocalDate returnDate, Double trafficTicket) {
         this.id = id;
-        this.loanId = loanId;
+        this.loan = loan;
         this.returnDate = returnDate;
         this.trafficTicket = trafficTicket;
     }
@@ -26,12 +26,12 @@ public class Devolution {
         this.id = id;
     }
 
-    public Integer getLoanId() {
-        return loanId;
+    public Loan getLoan() {
+        return loan;
     }
 
-    public void setLoanId(Integer loanId) {
-        this.loanId = loanId;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     public LocalDate getReturnDate() {
