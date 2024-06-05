@@ -13,27 +13,23 @@ public class UserService {
         this.userDao = DaoFactory.createUserDao();
     }
 
-    public void createNewUser(String name, String email, String phone, String address) {
-        userDao.insert(new User(null, name, email, phone, address));
+    public void createNewUser(User user) {
+        userDao.insert(user);
     }
 
-    public void updateUser(User user, String name, String email, String phone, String address) {
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setAddress(address);
+    public void updateUser(User user) {
         userDao.update(user);
     }
 
-    public void deleteStudentById(Integer id) {
+    public void deleteUserById(Integer id) {
         userDao.deleteById(id);
     }
 
-    public User getStudentById(Integer id) {
+    public User getUserById(Integer id) {
         return userDao.findById(id);
     }
 
-    public List<User> getAllStudents() {
+    public List<User> getAllUsers() {
         return userDao.findAll();
     }
 
