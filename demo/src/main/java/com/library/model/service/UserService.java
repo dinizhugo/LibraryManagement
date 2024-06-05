@@ -7,7 +7,11 @@ import com.library.model.entities.User;
 import java.util.List;
 
 public class UserService {
-    private GenericDao<User> userDao = DaoFactory.createUserDao();
+    private final GenericDao<User> userDao;
+
+    public UserService() {
+        this.userDao = DaoFactory.createUserDao();
+    }
 
     public void createNewUser(String name, String email, String phone, String address) {
         userDao.insert(new User(null, name, email, phone, address));
@@ -21,11 +25,11 @@ public class UserService {
         userDao.update(user);
     }
 
-    public void deleteStudentById(int id) {
+    public void deleteStudentById(Integer id) {
         userDao.deleteById(id);
     }
 
-    public User getStudentById(int id) {
+    public User getStudentById(Integer id) {
         return userDao.findById(id);
     }
 

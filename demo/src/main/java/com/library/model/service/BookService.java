@@ -8,7 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class BookService {
-    private GenericDao<Book> bookDao = DaoFactory.createBookDao();
+    private final GenericDao<Book> bookDao;
+
+    public BookService() {
+        this.bookDao =  DaoFactory.createBookDao();
+    }
 
     public void addBook(String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) {
         bookDao.insert(new Book(null, title, author, publishingCompany, category, amount,publicationDate));

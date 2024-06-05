@@ -10,7 +10,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class LoanService {
-    private LoanDao loanDao = DaoFactory.createLoanDao();
+    private final LoanDao loanDao;
+
+    public LoanService() {
+        this.loanDao = DaoFactory.createLoanDao();
+    }
 
     public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
         loanDao.insert(new Loan(null, user, book, loanDate, estimatedDate));
@@ -24,11 +28,11 @@ public class LoanService {
         loanDao.update(loan);
     }
 
-    public void deleteLoanById(int id) {
+    public void deleteLoanById(Integer id) {
         loanDao.deleteById(id);
     }
 
-    public Loan getLoanById(int id) {
+    public Loan getLoanById(Integer id) {
         return  loanDao.findById(id);
     }
 

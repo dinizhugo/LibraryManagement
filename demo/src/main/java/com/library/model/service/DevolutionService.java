@@ -6,10 +6,16 @@ import com.library.model.entities.Devolution;
 import com.library.model.entities.Loan;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class DevolutionService {
-    private DevolutionDao devolutionDao = DaoFactory.createDevolutionDao();
+    private final DevolutionDao devolutionDao;
+    private static final double DAILY_LATE_FEE = 1.5;
+
+    public DevolutionService() {
+        this.devolutionDao = DaoFactory.createDevolutionDao();
+    }
 
     public void addDevolution(Loan loan, LocalDate returnDate, Double trafficTicket) {
         devolutionDao.insert(new Devolution(null, loan, returnDate, trafficTicket));
@@ -36,6 +42,17 @@ public class DevolutionService {
 
     public List<Devolution> getAllDevolution() {
         return devolutionDao.findAll();
+    }
+
+    public double calculateLateFee(Devolution devolution) {
+        LocalDate returnDate = devolution.getReturnDate();
+        LocalDate estimatedReturnDate = devolution.getLoan().getEstimatedDate();
+
+        if (returnDate.isAfter(estimatedReturnDate)) {
+            long daysLate = ChronoUnit.DAYS.between(estimatedReturnDate, returnDate);
+            return DAILY_LATE_FEE * daysLate;
+        }
+        return  0.0;
     }
 
 }
