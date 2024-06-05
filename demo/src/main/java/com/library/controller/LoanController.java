@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class LoanController {
-    private LoanService loanService = new LoanService();
+    private final LoanService loanService = new LoanService();
 
     public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) throws UninformedParameterException, InsufficientBooksExceptions {
         if (user == null && book == null && estimatedDate == null) {

@@ -11,20 +11,17 @@ import java.util.List;
 
 public class DevolutionService {
     private final DevolutionDao devolutionDao;
-    private static final double DAILY_LATE_FEE = 1.5;
+    private static final double DAILY_LATE_FEE = 1.50;
 
     public DevolutionService() {
         this.devolutionDao = DaoFactory.createDevolutionDao();
     }
 
-    public void addDevolution(Loan loan, LocalDate returnDate, Double trafficTicket) {
-        devolutionDao.insert(new Devolution(null, loan, returnDate, trafficTicket));
+    public void addDevolution(Devolution devolution) {
+        devolutionDao.insert(devolution);
     }
 
-    public void updateDevolution(Devolution devolution, Loan loan, LocalDate returnDate, Double trafficTicket) {
-        devolution.setReturnDate(returnDate);
-        devolution.setLoan(loan);
-        devolution.setTrafficTicket(trafficTicket);
+    public void updateDevolution(Devolution devolution) {
         devolutionDao.update(devolution);
     }
 
