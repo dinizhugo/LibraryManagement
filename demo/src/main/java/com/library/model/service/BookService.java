@@ -4,7 +4,6 @@ import com.library.model.dao.DaoFactory;
 import com.library.model.dao.GenericDao;
 import com.library.model.entities.Book;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class BookService {
@@ -14,17 +13,11 @@ public class BookService {
         this.bookDao =  DaoFactory.createBookDao();
     }
 
-    public void addBook(String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) {
-        bookDao.insert(new Book(null, title, author, publishingCompany, category, amount,publicationDate));
+    public void addBook(Book book) {
+        bookDao.insert(book);
     }
 
-    public void updateBook(Book book, String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) {
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPublishingCompany(publishingCompany);
-        book.setCategory(category);
-        book.setAmount(amount);
-        book.setPublicationDate(publicationDate);
+    public void updateBook(Book book) {
         bookDao.update(book);
     }
 

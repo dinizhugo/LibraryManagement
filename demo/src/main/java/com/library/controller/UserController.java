@@ -8,7 +8,7 @@ import com.library.model.service.UserService;
 import java.util.List;
 
 public class UserController {
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     public void createNewUser(String name, String email, String phone, String address) throws UninformedParameterException {
         if (name == null && email == null && phone == null && address == null) {
