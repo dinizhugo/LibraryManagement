@@ -16,15 +16,11 @@ public class LoanService {
         this.loanDao = DaoFactory.createLoanDao();
     }
 
-    public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
-        loanDao.insert(new Loan(null, user, book, loanDate, estimatedDate));
+    public void createNewLoan(Loan loan) {
+        loanDao.insert(loan);
     }
 
-    public void updateLoan(Loan loan, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
-        loan.setUser(user);
-        loan.setBook(book);
-        loan.setLoanDate(loanDate);
-        loan.setEstimatedDate(estimatedDate);
+    public void updateLoan(Loan loan) {
         loanDao.update(loan);
     }
 
