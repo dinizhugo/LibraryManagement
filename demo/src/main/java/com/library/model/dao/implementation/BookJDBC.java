@@ -60,7 +60,7 @@ public class BookJDBC implements GenericDao<Book> {
         try {
             preparedStatement = connection.prepareStatement(
                     "UPDATE books "
-                    + "SET (titulo = ?, autor = ?, categoria = ?, data_publicacao = ?, editora = ?, quantidade = ?) "
+                    + "SET titulo = ?, autor = ?, categoria = ?, data_publicacao = ?, editora = ?, quantidade = ? "
                     + "WHERE id = ?");
             preparedStatement.setString(1, obj.getTitle());
             preparedStatement.setString(2, obj.getAuthor());

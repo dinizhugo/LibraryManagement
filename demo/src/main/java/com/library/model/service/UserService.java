@@ -7,7 +7,7 @@ import com.library.model.entities.User;
 import java.util.List;
 
 public class UserService {
-    private final GenericDao<User> userDao;
+    private GenericDao<User> userDao;
 
     public UserService() {
         this.userDao = DaoFactory.createUserDao();

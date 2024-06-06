@@ -26,7 +26,7 @@ public class UserJDBC implements GenericDao<User> {
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO users "
                             +   "(name, email, phone, address)"
-                            +   "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                            +   "VALUES (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, obj.getName());
             preparedStatement.setString(2, obj.getEmail());
             preparedStatement.setString(3, obj.getPhone());
@@ -37,7 +37,7 @@ public class UserJDBC implements GenericDao<User> {
             if (rowsAffected > 0) {
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    int id = resultSet.getInt("id");
+                    int id = resultSet.getInt(1);
                     obj.setId(id);
                 }
                 DB.closeResultSet(resultSet);
@@ -59,7 +59,7 @@ public class UserJDBC implements GenericDao<User> {
         try {
             preparedStatement = connection.prepareStatement(
                     "UPDATE users "
-                            + "SET (name = ?, email = ?, phone = ?, address = ?) "
+                            + "SET name = ?, email = ?, phone = ?, address = ? "
                             + "WHERE id = ?");
             preparedStatement.setString(1, obj.getName());
             preparedStatement.setString(2, obj.getEmail());
