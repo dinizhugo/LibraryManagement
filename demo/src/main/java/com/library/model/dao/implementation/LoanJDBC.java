@@ -5,6 +5,7 @@ import com.library.database.DbException;
 import com.library.model.dao.LoanDao;
 import com.library.model.entities.Book;
 import com.library.model.entities.Loan;
+import com.library.model.entities.LoanStatus;
 import com.library.model.entities.User;
 
 import java.sql.Connection;
@@ -28,19 +29,20 @@ public class LoanJDBC implements LoanDao {
         try {
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO loans " +
-                            "(id_user, id_book, loan_date, estimated_date) " +
-                            "VALUES (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                            "(id_user, id_book, loan_date, estimated_date, status) " +
+                            "VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, obj.getUser().getId());
             preparedStatement.setInt(2, obj.getBook().getId());
             preparedStatement.setDate(3, java.sql.Date.valueOf(obj.getLoanDate()));
             preparedStatement.setDate(4, java.sql.Date.valueOf(obj.getEstimatedDate()));
+            preparedStatement.setString(5, obj.getLoanStatus().toString());
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                     if (resultSet.next()) {
-                        obj.setId(resultSet.getInt("id"));
+                        obj.setId(resultSet.getInt(1));
                     }
                 }
             } else {
@@ -60,13 +62,14 @@ public class LoanJDBC implements LoanDao {
         try {
             preparedStatement = connection.prepareStatement(
                     "UPDATE loans " +
-                            "SET id_user = ?, id_book = ?, loan_date = ?, estimated_date = ? " +
+                            "SET id_user = ?, id_book = ?, loan_date = ?, estimated_date = ?, status = ?" +
                             "WHERE id = ?");
             preparedStatement.setInt(1, obj.getUser().getId());
             preparedStatement.setInt(2, obj.getBook().getId());
             preparedStatement.setDate(3, java.sql.Date.valueOf(obj.getLoanDate()));
             preparedStatement.setDate(4, java.sql.Date.valueOf(obj.getEstimatedDate()));
-            preparedStatement.setInt(5, obj.getId());
+            preparedStatement.setString(5, obj.getLoanStatus().toString());
+            preparedStatement.setInt(6, obj.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -110,9 +113,10 @@ public class LoanJDBC implements LoanDao {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                LoanStatus loanStatus = LoanStatus.valueOf(resultSet.getString("status"));
                 User user = instantiateUser(resultSet);
                 Book book = instantiateBook(resultSet);
-                return instantiateLoan(resultSet, user, book);
+                return instantiateLoan(resultSet, user, book, loanStatus);
             }
             return null;
         } catch (SQLException e) {
@@ -141,8 +145,9 @@ public class LoanJDBC implements LoanDao {
 
             List<Loan> loans = new ArrayList<>();
             while (resultSet.next()) {
+                LoanStatus loanStatus = LoanStatus.valueOf(resultSet.getString("status"));
                 Book book = instantiateBook(resultSet);
-                loans.add(instantiateLoan(resultSet, user, book));
+                loans.add(instantiateLoan(resultSet, user, book, loanStatus));
             }
             return loans;
         } catch (SQLException e) {
@@ -172,7 +177,8 @@ public class LoanJDBC implements LoanDao {
             List<Loan> loans = new ArrayList<>();
             while (resultSet.next()) {
                 User user = instantiateUser(resultSet);
-                loans.add(instantiateLoan(resultSet, user, book));
+                LoanStatus loanStatus = LoanStatus.valueOf(resultSet.getString("status"));
+                loans.add(instantiateLoan(resultSet, user, book, loanStatus));
             }
             return loans;
         } catch (SQLException e) {
@@ -196,15 +202,16 @@ public class LoanJDBC implements LoanDao {
                             "FROM loans " +
                             "INNER JOIN users ON loans.id_user = users.id " +
                             "INNER JOIN books ON loans.id_book = books.id " +
-                            "ORDER BY loans.id");
+                            "ORDER BY loans.status");
             resultSet = preparedStatement.executeQuery();
 
             List<Loan> loans = new ArrayList<>();
 
             while (resultSet.next()) {
+                LoanStatus loanStatus = LoanStatus.valueOf(resultSet.getString("status"));
                 User user = instantiateUser(resultSet);
                 Book book = instantiateBook(resultSet);
-                Loan loan = instantiateLoan(resultSet,user, book);
+                Loan loan = instantiateLoan(resultSet,user, book, loanStatus);
                 loans.add(loan);
             }
             return loans;
@@ -238,13 +245,14 @@ public class LoanJDBC implements LoanDao {
         return book;
     }
 
-    private Loan instantiateLoan(ResultSet resultSet, User user, Book book) throws SQLException {
+    private Loan instantiateLoan(ResultSet resultSet, User user, Book book, LoanStatus loanStatus) throws SQLException {
         Loan currentLoan = new Loan();
         currentLoan.setId(resultSet.getInt("id"));
         currentLoan.setUser(user);
         currentLoan.setBook(book);
         currentLoan.setLoanDate(resultSet.getDate("loan_date").toLocalDate());
         currentLoan.setEstimatedDate(resultSet.getDate("estimated_date").toLocalDate());
+        currentLoan.setLoanStatus(loanStatus);
         return currentLoan;
     }
 }

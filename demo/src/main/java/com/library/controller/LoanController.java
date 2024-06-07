@@ -5,7 +5,9 @@ import com.library.exceptions.LoanNotFoundException;
 import com.library.exceptions.UninformedParameterException;
 import com.library.model.entities.Book;
 import com.library.model.entities.Loan;
+import com.library.model.entities.LoanStatus;
 import com.library.model.entities.User;
+import com.library.model.service.BookService;
 import com.library.model.service.LoanService;
 
 import java.time.LocalDate;
@@ -14,16 +16,17 @@ import java.util.List;
 public class LoanController {
     private final LoanService loanService = new LoanService();
 
-    public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) throws UninformedParameterException, InsufficientBooksExceptions {
+    public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) throws UninformedParameterException, InsufficientBooksExceptions {
         if (user == null && book == null && estimatedDate == null) {
             throw new UninformedParameterException();
         }
 
-        if (book != null && book.getAmount() < 0) {
+        if (book != null && book.getAmount() < 1) {
             throw new InsufficientBooksExceptions();
         }
 
-        loanService.createNewLoan(new Loan(null, user, book, loanDate, estimatedDate));
+        loanService.createNewLoan(new Loan(null, user, book, loanDate, estimatedDate, loanStatus));
+        reduceBookStock(book);
     }
 
     public void updateLoan(Loan loan, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
@@ -67,5 +70,11 @@ public class LoanController {
             throw new LoanNotFoundException();
         }
         return loans;
+    }
+
+    private void reduceBookStock(Book book) {
+        BookService bookService = new BookService();
+        book.setAmount(book.getAmount() - 1);
+        bookService.updateBook(book);
     }
 }

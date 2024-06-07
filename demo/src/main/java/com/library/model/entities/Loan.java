@@ -9,15 +9,17 @@ public class Loan {
     private Book book;
     private LocalDate loanDate;
     private LocalDate estimatedDate;
+    private LoanStatus loanStatus;
 
     public Loan() {}
 
-    public Loan(Integer id, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
+    public Loan(Integer id, User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
         this.estimatedDate = estimatedDate;
+        this.loanStatus = loanStatus;
     }
 
     public Integer getId() {
@@ -58,6 +60,14 @@ public class Loan {
 
     public void setEstimatedDate(LocalDate estimatedDate) {
         this.estimatedDate = estimatedDate;
+    }
+
+    public LoanStatus getLoanStatus() {
+        return loanStatus;
+    }
+
+    public void setLoanStatus(LoanStatus loanStatus) {
+        this.loanStatus = loanStatus;
     }
 
     @Override

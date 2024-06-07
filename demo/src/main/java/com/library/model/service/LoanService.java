@@ -6,7 +6,6 @@ import com.library.model.entities.Book;
 import com.library.model.entities.Loan;
 import com.library.model.entities.User;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class LoanService {
