@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.library.controller.BookController;
 import com.library.controller.LoanController;
 import com.library.controller.UserController;
+import com.library.exceptions.ImpossibleToDeleteTheLoanException;
 import com.library.exceptions.LoanNotFoundException;
 import com.library.model.entities.Book;
 import com.library.model.entities.Loan;
@@ -82,7 +83,11 @@ public class LoanTests {
         int sizeBeforeDelete = loans.size();
         Loan lastLoan = assertDoesNotThrow(() -> loanController.getLoan(loans.get(sizeBeforeDelete - 1).getId()));
 
-        loanController.deleteLoan(lastLoan.getId());
+        if (lastLoan.getLoanStatus() == LoanStatus.RETURNED) {
+            assertDoesNotThrow(() -> loanController.deleteLoan(lastLoan.getId()));
+        } else {
+            assertThrows(ImpossibleToDeleteTheLoanException.class, () -> loanController.deleteLoan(lastLoan.getId()));
+        }
 
         List<Loan> newLoans = loanController.getLoans();
         int sizeAfterDelete = newLoans.size();

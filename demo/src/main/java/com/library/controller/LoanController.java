@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.exceptions.ImpossibleToDeleteTheLoanException;
 import com.library.exceptions.InsufficientBooksExceptions;
 import com.library.exceptions.LoanNotFoundException;
 import com.library.exceptions.UninformedParameterException;
@@ -41,7 +42,12 @@ public class LoanController {
         loanService.updateLoan(loan);
     }
 
-    public void deleteLoan(Integer id) {
+    public void deleteLoan(Integer id) throws ImpossibleToDeleteTheLoanException {
+        Loan loan = loanService.getLoanById(id);
+
+        if (loan.getLoanStatus() == LoanStatus.NOT_RETURNED) {
+            throw new ImpossibleToDeleteTheLoanException();
+        }
         loanService.deleteLoanById(id);
     }
 
