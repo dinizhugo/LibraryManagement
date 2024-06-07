@@ -38,7 +38,7 @@ public class BookJDBC implements GenericDao<Book> {
             if (rowsAffected > 0) {
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    int id = resultSet.getInt("id");
+                    int id = resultSet.getInt(1);
                     obj.setId(id);
                 }
                 DB.closeResultSet(resultSet);

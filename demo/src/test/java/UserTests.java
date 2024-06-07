@@ -60,11 +60,8 @@ public class UserTests {
 
     @Test
     void deleteUser() {
+        createUser();
         String name = "Ronaldo Santos de Oliveira";
-        String email = "ronaldo@gmail.com";
-        String phone = "(83)40028922";
-        String address = "Esperança-PB";
-        assertDoesNotThrow(() -> controller.createNewUser(name, email, phone, address));
         Integer id = (controller.getUsers().stream().filter(u -> Objects.equals(u.getName(), name)).findFirst().get().getId());
         User user = assertDoesNotThrow(() -> controller.getUser(id));
 

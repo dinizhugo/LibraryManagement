@@ -18,7 +18,10 @@ public class BookController {
         bookService.addBook(new Book(null, title, author, publishingCompany, category, amount,publicationDate));
     }
 
-    public void updateBook(Book book, String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) {
+    public void updateBook(Book book, String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) throws UninformedParameterException {
+        if (title == null && author == null && category == null && amount < 1 && publicationDate == null) {
+            throw new UninformedParameterException();
+        }
         book.setTitle(title);
         book.setAuthor(author);
         book.setPublishingCompany(publishingCompany);
