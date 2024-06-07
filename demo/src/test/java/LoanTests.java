@@ -85,7 +85,7 @@ public class LoanTests {
         loanController.deleteLoan(lastLoan.getId());
 
         List<Loan> newLoans = loanController.getLoans();
-        Integer sizeAfterDelete = newLoans.size();
+        int sizeAfterDelete = newLoans.size();
 
         assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
     }

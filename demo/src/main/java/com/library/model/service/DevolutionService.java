@@ -41,10 +41,7 @@ public class DevolutionService {
         return devolutionDao.findAll();
     }
 
-    public double calculateLateFee(Devolution devolution) {
-        LocalDate returnDate = devolution.getReturnDate();
-        LocalDate estimatedReturnDate = devolution.getLoan().getEstimatedDate();
-
+    public double calculateLateFee(LocalDate returnDate, LocalDate estimatedReturnDate) {
         if (returnDate.isAfter(estimatedReturnDate)) {
             long daysLate = ChronoUnit.DAYS.between(estimatedReturnDate, returnDate);
             return DAILY_LATE_FEE * daysLate;

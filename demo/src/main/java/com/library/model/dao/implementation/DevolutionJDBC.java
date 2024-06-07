@@ -99,8 +99,8 @@ public class DevolutionJDBC implements DevolutionDao {
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT devolution.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, " +
-                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate " +
+                    "SELECT devolution.*, loans.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, users.id AS id_user, " +
+                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate, books.id AS id_book " +
                             "FROM devolution " +
                             "INNER JOIN loans ON devolution.id_loan = loans.id " +
                             "INNER JOIN users ON loans.id_user = users.id " +
@@ -128,8 +128,8 @@ public class DevolutionJDBC implements DevolutionDao {
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT devolution.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, " +
-                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate " +
+                    "SELECT devolution.*, loans.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, users.id AS id_user, " +
+                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate, books.id AS id_book " +
                             "FROM devolution " +
                             "INNER JOIN loans ON devolution.id_loan = loans.id " +
                             "INNER JOIN users ON loans.id_user = users.id " +
@@ -157,8 +157,8 @@ public class DevolutionJDBC implements DevolutionDao {
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT devolution.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, " +
-                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate " +
+                    "SELECT devolution.*, loans.*, users.name AS user_name, users.email AS user_email, users.phone AS user_phone, users.address AS user_address, users.id AS id_user, " +
+                            "books.titulo AS book_title, books.autor AS book_author, books.editora AS book_publishingCompany, books.quantidade AS book_amount, books.categoria AS book_category, books.data_publicacao AS book_publicationDate, books.id AS id_book " +
                             "FROM devolution " +
                             "INNER JOIN loans ON devolution.id_loan = loans.id " +
                             "INNER JOIN users ON loans.id_user = users.id " +
