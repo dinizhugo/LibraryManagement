@@ -13,13 +13,13 @@ public class Loan {
 
     public Loan() {}
 
-    public Loan(Integer id, User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) {
+    public Loan(Integer id, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
         this.estimatedDate = estimatedDate;
-        this.loanStatus = loanStatus;
+        this.loanStatus = LoanStatus.NOT_RETURNED;
     }
 
     public Integer getId() {

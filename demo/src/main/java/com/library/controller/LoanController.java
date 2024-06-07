@@ -16,7 +16,7 @@ import java.util.List;
 public class LoanController {
     private final LoanService loanService = new LoanService();
 
-    public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) throws UninformedParameterException, InsufficientBooksExceptions {
+    public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) throws UninformedParameterException, InsufficientBooksExceptions {
         if (user == null && book == null && estimatedDate == null) {
             throw new UninformedParameterException();
         }
@@ -25,15 +25,19 @@ public class LoanController {
             throw new InsufficientBooksExceptions();
         }
 
-        loanService.createNewLoan(new Loan(null, user, book, loanDate, estimatedDate, loanStatus));
+        loanService.createNewLoan(new Loan(null, user, book, loanDate, estimatedDate));
         reduceBookStock(book);
     }
 
-    public void updateLoan(Loan loan, User user, Book book, LocalDate loanDate, LocalDate estimatedDate) {
+    public void updateLoan(Loan loan, User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) throws UninformedParameterException {
+        if (user == null && book == null && estimatedDate == null && loanStatus == null) {
+            throw new UninformedParameterException();
+        }
         loan.setUser(user);
         loan.setBook(book);
         loan.setLoanDate(loanDate);
         loan.setEstimatedDate(estimatedDate);
+        loan.setLoanStatus(loanStatus);
         loanService.updateLoan(loan);
     }
 

@@ -70,7 +70,6 @@ public class BookTests {
 
         String title = "Código Limpo";
         Integer idBook = controller.getBooks().stream().filter(book -> Objects.equals(book.getTitle(), title)).findFirst().get().getId();
-        Book book = assertDoesNotThrow(() -> controller.getBook(idBook));
 
         controller.deleteBook(idBook);
         assertThrows(BookNotFoundException.class, () -> controller.getBook(idBook));
