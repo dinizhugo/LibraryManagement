@@ -1,8 +1,10 @@
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\service\DevolutionService.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\Main.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\ListBooksScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\DevolutionNotFoundException.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Devolution.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\implementation\UserJDBC.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\AddBookScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Loan.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\users\CreateNewUser.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\DaoFactory.java
@@ -22,6 +24,7 @@ C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\controller\LoanController.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\users\ListUsersScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\users\UserOptions.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\UpdateBook.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\implementation\DevolutionJDBC.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\users\UpdateUser.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\database\DbException.java
@@ -33,7 +36,9 @@ C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\UninformedParameterException.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\GenericDao.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\LoanDao.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\GetBooksScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\service\BookService.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\LoanAlreadyReturned.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\BookOptions.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\controller\UserController.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Book.java

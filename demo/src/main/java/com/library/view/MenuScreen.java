@@ -4,7 +4,12 @@
  */
 package com.library.view;
 
+import com.library.controller.BookController;
 import com.library.controller.UserController;
+import com.library.view.books.AddBookScreen;
+import com.library.view.books.BookOptions;
+import com.library.view.books.GetBooksScreen;
+import com.library.view.books.ListBooksScreen;
 import com.library.view.users.CreateNewUser;
 import com.library.view.users.GetUsersScreen;
 import com.library.view.users.ListUsersScreen;
@@ -16,6 +21,7 @@ import com.library.view.users.UserOptions;
  */
 public class MenuScreen extends javax.swing.JFrame {
     private final UserController userController = new UserController();
+    private final BookController bookController = new BookController();
     public MenuScreen() {
         initComponents();
     }
@@ -106,15 +112,35 @@ public class MenuScreen extends javax.swing.JFrame {
         Book.setText("Livros");
 
         addBook.setText("Adcionar livro");
+        addBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBookActionPerformed(evt);
+            }
+        });
         Book.add(addBook);
 
         updateBook.setText("Atualizar livro");
+        updateBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBookActionPerformed(evt);
+            }
+        });
         Book.add(updateBook);
 
         deleteBook.setText("Remover livro");
+        deleteBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBookActionPerformed(evt);
+            }
+        });
         Book.add(deleteBook);
 
         getBooks.setText("Listar livros");
+        getBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getBooksActionPerformed(evt);
+            }
+        });
         Book.add(getBooks);
 
         jMenuBar1.add(Book);
@@ -213,6 +239,29 @@ public class MenuScreen extends javax.swing.JFrame {
     private void deleteLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLoanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteLoanActionPerformed
+
+    private void addBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookActionPerformed
+        AddBookScreen addBookScreen = new AddBookScreen(bookController);
+        addBookScreen.setVisible(true);
+        desktop.add(addBookScreen);
+    }//GEN-LAST:event_addBookActionPerformed
+
+    private void updateBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBookActionPerformed
+        ListBooksScreen listBooksScreen = new ListBooksScreen(bookController, desktop, BookOptions.UPDATE);
+        listBooksScreen.setVisible(true);
+        desktop.add(listBooksScreen);
+    }//GEN-LAST:event_updateBookActionPerformed
+
+    private void deleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBookActionPerformed
+        ListBooksScreen listBooksScreen = new ListBooksScreen(bookController, desktop, BookOptions.DELETE);
+        listBooksScreen.setVisible(true);
+        desktop.add(listBooksScreen);
+    }//GEN-LAST:event_deleteBookActionPerformed
+
+    private void getBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getBooksActionPerformed
+        GetBooksScreen getBooksScreen = new GetBooksScreen(bookController);
+        getBooksScreen.setVisible(true);
+    }//GEN-LAST:event_getBooksActionPerformed
 
     /**
      * @param args the command line arguments

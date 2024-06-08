@@ -12,14 +12,14 @@ public class BookController {
     private final BookService bookService = new BookService();
 
     public void addBook(String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) throws UninformedParameterException {
-        if (title == null && author == null && category == null && amount < 1 && publicationDate == null) {
+        if (title == null || author == null || amount < 1 || publicationDate == null) {
             throw new UninformedParameterException();
         }
         bookService.addBook(new Book(null, title, author, publishingCompany, category, amount,publicationDate));
     }
 
     public void updateBook(Book book, String title, String author, String publishingCompany, String category, int amount, LocalDate publicationDate) throws UninformedParameterException {
-        if (title == null && author == null && category == null && amount < 1 && publicationDate == null) {
+        if (title == null || author == null ||  amount < 1 || publicationDate == null) {
             throw new UninformedParameterException();
         }
         book.setTitle(title);
