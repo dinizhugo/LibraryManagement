@@ -6,12 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="User">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
+            <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="createUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Criar novo usu&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Criar novo usuario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createUserActionPerformed"/>
@@ -19,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="updateUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Atualizar usu&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Atualizar usuario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateUserActionPerformed"/>
@@ -27,7 +27,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Remover usu&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Remover usuario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUserActionPerformed"/>
@@ -35,8 +35,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="getUsers">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar usu&#xe1;rios"/>
+                <Property name="text" type="java.lang.String" value="Listar usuarios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getUsersActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -69,17 +72,17 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="Loan">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Empr&#xe9;stimos"/>
+            <Property name="text" type="java.lang.String" value="Emprestimos"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="newLoan">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Novo empr&#xe9;stimo"/>
+                <Property name="text" type="java.lang.String" value="Novo emprestimo"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="updateLoan">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Atualizar empr&#xe9;stimo"/>
+                <Property name="text" type="java.lang.String" value="Atualizar emprestimo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateLoanActionPerformed"/>
@@ -87,19 +90,22 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteLoan">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Excluir empr&#xe9;stimo"/>
+                <Property name="text" type="java.lang.String" value="Excluir emprestimo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteLoanActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="getLoans">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar empr&#xe9;stimo"/>
+                <Property name="text" type="java.lang.String" value="Listar emprestimo"/>
               </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Devolution">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Devolu&#xe7;&#xf5;es"/>
+            <Property name="text" type="java.lang.String" value="Devolu&#xe7;oes"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="newDevolution">
@@ -109,17 +115,17 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="updateDevolution">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Atualizar devolu&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Atualizar devolu&#xe7;ao"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteDevolution">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Deletar devolu&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Deletar devolu&#xe7;ao"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="getDevolutions">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar devolu&#xe7;&#xf5;es"/>
+                <Property name="text" type="java.lang.String" value="Listar devolu&#xe7;oes"/>
               </Properties>
             </MenuItem>
           </SubComponents>

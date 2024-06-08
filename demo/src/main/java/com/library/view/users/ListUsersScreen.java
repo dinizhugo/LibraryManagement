@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package com.library.view;
+package com.library.view.users;
 
 import com.library.controller.UserController;
 import com.library.exceptions.UserNotFoundException;
@@ -76,6 +76,8 @@ public class ListUsersScreen extends javax.swing.JInternalFrame {
             }
         });
         tableUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableUsers.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableUsers);
         if (tableUsers.getColumnModel().getColumnCount() > 0) {
             tableUsers.getColumnModel().getColumn(0).setResizable(false);
@@ -141,6 +143,9 @@ public class ListUsersScreen extends javax.swing.JInternalFrame {
     private int getRow() throws UserNotFoundException {
         int row = tableUsers.getSelectedRow();
  
+        if (row < 0) {
+            throw new IllegalArgumentException("Select a row.");
+        }
         return row;
     }
     
@@ -150,7 +155,9 @@ public class ListUsersScreen extends javax.swing.JInternalFrame {
             updateUser.setVisible(true);
             desktop.add(updateUser);
         } else {
-            
+            // Fazer valida��o se o Usu�rio possu� algum emprestimo
+            userController.deleteUser(user.getId());
+            JOptionPane.showMessageDialog(this, "Usuario foi removido com sucesso!");
         }
     }
     
@@ -159,7 +166,7 @@ public class ListUsersScreen extends javax.swing.JInternalFrame {
             User user = userController.getUser(users.get(getRow()).getId());
             selectOption(user, userController, userOptions, desktop);
             this.dispose();
-        } catch (UserNotFoundException e) {
+        } catch (UserNotFoundException | IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }

@@ -5,8 +5,10 @@
 package com.library.view;
 
 import com.library.controller.UserController;
-import com.library.model.entities.User;
-import javax.swing.JOptionPane;
+import com.library.view.users.CreateNewUser;
+import com.library.view.users.GetUsersScreen;
+import com.library.view.users.ListUsersScreen;
+import com.library.view.users.UserOptions;
 
 /**
  *
@@ -65,9 +67,9 @@ public class MenuScreen extends javax.swing.JFrame {
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        User.setText("Usuários");
+        User.setText("Usuarios");
 
-        createUser.setText("Criar novo usuário");
+        createUser.setText("Criar novo usuario");
         createUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createUserActionPerformed(evt);
@@ -75,7 +77,7 @@ public class MenuScreen extends javax.swing.JFrame {
         });
         User.add(createUser);
 
-        updateUser.setText("Atualizar usuário");
+        updateUser.setText("Atualizar usuario");
         updateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateUserActionPerformed(evt);
@@ -83,7 +85,7 @@ public class MenuScreen extends javax.swing.JFrame {
         });
         User.add(updateUser);
 
-        deleteUser.setText("Remover usuário");
+        deleteUser.setText("Remover usuario");
         deleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserActionPerformed(evt);
@@ -91,7 +93,12 @@ public class MenuScreen extends javax.swing.JFrame {
         });
         User.add(deleteUser);
 
-        getUsers.setText("Listar usuários");
+        getUsers.setText("Listar usuarios");
+        getUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getUsersActionPerformed(evt);
+            }
+        });
         User.add(getUsers);
 
         jMenuBar1.add(User);
@@ -112,12 +119,12 @@ public class MenuScreen extends javax.swing.JFrame {
 
         jMenuBar1.add(Book);
 
-        Loan.setText("Empréstimos");
+        Loan.setText("Emprestimos");
 
-        newLoan.setText("Novo empréstimo");
+        newLoan.setText("Novo emprestimo");
         Loan.add(newLoan);
 
-        updateLoan.setText("Atualizar empréstimo");
+        updateLoan.setText("Atualizar emprestimo");
         updateLoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateLoanActionPerformed(evt);
@@ -125,26 +132,31 @@ public class MenuScreen extends javax.swing.JFrame {
         });
         Loan.add(updateLoan);
 
-        deleteLoan.setText("Excluir empréstimo");
+        deleteLoan.setText("Excluir emprestimo");
+        deleteLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteLoanActionPerformed(evt);
+            }
+        });
         Loan.add(deleteLoan);
 
-        getLoans.setText("Listar empréstimo");
+        getLoans.setText("Listar emprestimo");
         Loan.add(getLoans);
 
         jMenuBar1.add(Loan);
 
-        Devolution.setText("Devoluções");
+        Devolution.setText("Devoluçoes");
 
         newDevolution.setText("Devolver livro");
         Devolution.add(newDevolution);
 
-        updateDevolution.setText("Atualizar devolução");
+        updateDevolution.setText("Atualizar devoluçao");
         Devolution.add(updateDevolution);
 
-        deleteDevolution.setText("Deletar devolução");
+        deleteDevolution.setText("Deletar devoluçao");
         Devolution.add(deleteDevolution);
 
-        getDevolutions.setText("Listar devoluções");
+        getDevolutions.setText("Listar devoluçoes");
         Devolution.add(getDevolutions);
 
         jMenuBar1.add(Devolution);
@@ -178,7 +190,9 @@ public class MenuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_createUserActionPerformed
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
-        // TODO add your handling code here:
+        ListUsersScreen listUsersScreen = new ListUsersScreen(userController, UserOptions.DELETE, desktop);
+        listUsersScreen.setVisible(true);
+        this.desktop.add(listUsersScreen);
     }//GEN-LAST:event_deleteUserActionPerformed
 
     private void updateLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLoanActionPerformed
@@ -190,6 +204,15 @@ public class MenuScreen extends javax.swing.JFrame {
         listUsersScreen.setVisible(true);
         this.desktop.add(listUsersScreen);
     }//GEN-LAST:event_updateUserActionPerformed
+
+    private void getUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getUsersActionPerformed
+        GetUsersScreen getUsersScreen = new GetUsersScreen(userController);
+        getUsersScreen.setVisible(true);
+    }//GEN-LAST:event_getUsersActionPerformed
+
+    private void deleteLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteLoanActionPerformed
 
     /**
      * @param args the command line arguments
