@@ -13,16 +13,17 @@ import com.library.model.service.LoanService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class LoanController {
     private final LoanService loanService = new LoanService();
 
     public void createNewLoan(User user, Book book, LocalDate loanDate, LocalDate estimatedDate) throws UninformedParameterException, InsufficientBooksExceptions {
-        if (user == null && book == null && estimatedDate == null) {
+        if (user == null || book == null || estimatedDate == null) {
             throw new UninformedParameterException();
         }
 
-        if (book != null && book.getAmount() < 1) {
+        if (book.getAmount() < 1) {
             throw new InsufficientBooksExceptions();
         }
 
@@ -31,9 +32,15 @@ public class LoanController {
     }
 
     public void updateLoan(Loan loan, User user, Book book, LocalDate loanDate, LocalDate estimatedDate, LoanStatus loanStatus) throws UninformedParameterException {
-        if (user == null && book == null && estimatedDate == null && loanStatus == null) {
+        if (loan == null ||user == null || book == null || estimatedDate == null || loanStatus == null) {
             throw new UninformedParameterException();
         }
+
+        if (!Objects.equals(loan.getBook(), book)) {
+            returningBook(loan);
+            reduceBookStock(book);
+        }
+
         loan.setUser(user);
         loan.setBook(book);
         loan.setLoanDate(loanDate);
@@ -85,6 +92,13 @@ public class LoanController {
     private void reduceBookStock(Book book) {
         BookService bookService = new BookService();
         book.setAmount(book.getAmount() - 1);
+        bookService.updateBook(book);
+    }
+
+    private void returningBook(Loan loan) {
+        BookService bookService = new BookService();
+        Book book = loan.getBook();
+        book.setAmount(book.getAmount() + 1);
         bookService.updateBook(book);
     }
 }

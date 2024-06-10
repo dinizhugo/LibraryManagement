@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.library.view.books;
+package com.library.view.loans;
 
-import com.library.controller.BookController;
-import com.library.model.entities.Book;
+import com.library.controller.LoanController;
+import com.library.model.entities.Loan;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Hugo Diniz
  */
-public class GetBooksScreen extends javax.swing.JFrame {
-    private BookController bookController = new BookController();
-    private List<Book> books;
+public class GetLoansScreen extends javax.swing.JFrame {
+    private final LoanController loanController;
+    private final List<Loan> loans;
     
-    public GetBooksScreen(BookController bookController) {
-        this.bookController = bookController;
-        this.books = bookController.getBooks();
+    public GetLoansScreen(LoanController loanController) {
+        this.loanController = loanController;
+        this.loans = loanController.getLoans();
         initComponents();
         initTable();
     }
@@ -35,26 +36,26 @@ public class GetBooksScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableBooks = new javax.swing.JTable();
+        tableLoan = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Lista de Livros");
+        setTitle("Emprestimos");
         setResizable(false);
 
-        tableBooks.setModel(new javax.swing.table.DefaultTableModel(
+        tableLoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title", "Author", "Publishing Company", "Category", "Publication Date", "Amount"
+                "User (Name)", "Book (Title)", "Loan Date", "Estimated Date", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -65,30 +66,31 @@ public class GetBooksScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableBooks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tableBooks);
+        tableLoan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableLoan.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tableLoan);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book-stack_3389047.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/payment_3532911.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(193, 193, 193)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -96,26 +98,26 @@ public class GetBooksScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void initTable() {
-        DefaultTableModel tableModel = (DefaultTableModel) tableBooks.getModel();
-        if (!books.isEmpty()) {
+        DefaultTableModel tableModel = (DefaultTableModel) tableLoan.getModel();
+        if (!loans.isEmpty()) {
             try {
-                books.forEach((Book book) -> {
-                tableModel.addRow(new Object[] {book.getTitle(), 
-                                                book.getAuthor(),
-                                                book.getPublishingCompany(),
-                                                book.getCategory(),
-                                                book.getPublicationDate().toString(),
-                                                book.getAmount()});});
-                tableBooks.setModel(tableModel);
+                loans.forEach((Loan loan) -> {
+                tableModel.addRow(new Object[] {loan.getUser().getName(), 
+                                                loan.getBook().getTitle(),
+                                                loan.getLoanDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                                                loan.getEstimatedDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                                                loan.getLoanStatus().toString()});});
+                tableLoan.setModel(tableModel);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Lista de Livros vazia.");
-            this.dispose();
+            JOptionPane.showMessageDialog(this, "Lista de emprestimos vazio.");
         }
     }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -130,20 +132,20 @@ public class GetBooksScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GetBooksScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GetLoansScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GetBooksScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GetLoansScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GetBooksScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GetLoansScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GetBooksScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GetLoansScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GetBooksScreen().setVisible(true);
+                new GetLoansScreen().setVisible(true);
             }
         });*/
     }
@@ -151,6 +153,6 @@ public class GetBooksScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableBooks;
+    private javax.swing.JTable tableLoan;
     // End of variables declaration//GEN-END:variables
 }

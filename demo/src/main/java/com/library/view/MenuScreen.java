@@ -5,11 +5,16 @@
 package com.library.view;
 
 import com.library.controller.BookController;
+import com.library.controller.LoanController;
 import com.library.controller.UserController;
 import com.library.view.books.AddBookScreen;
 import com.library.view.books.BookOptions;
 import com.library.view.books.GetBooksScreen;
 import com.library.view.books.ListBooksScreen;
+import com.library.view.loans.GetLoansScreen;
+import com.library.view.loans.ListLoansScreen;
+import com.library.view.loans.LoanOptions;
+import com.library.view.loans.NewLoanScreen;
 import com.library.view.users.CreateNewUser;
 import com.library.view.users.GetUsersScreen;
 import com.library.view.users.ListUsersScreen;
@@ -20,6 +25,7 @@ import com.library.view.users.UserOptions;
  * @author Hugo Diniz
  */
 public class MenuScreen extends javax.swing.JFrame {
+    private final LoanController loanController = new LoanController();
     private final UserController userController = new UserController();
     private final BookController bookController = new BookController();
     public MenuScreen() {
@@ -148,6 +154,11 @@ public class MenuScreen extends javax.swing.JFrame {
         Loan.setText("Emprestimos");
 
         newLoan.setText("Novo emprestimo");
+        newLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newLoanActionPerformed(evt);
+            }
+        });
         Loan.add(newLoan);
 
         updateLoan.setText("Atualizar emprestimo");
@@ -167,6 +178,11 @@ public class MenuScreen extends javax.swing.JFrame {
         Loan.add(deleteLoan);
 
         getLoans.setText("Listar emprestimo");
+        getLoans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getLoansActionPerformed(evt);
+            }
+        });
         Loan.add(getLoans);
 
         jMenuBar1.add(Loan);
@@ -222,7 +238,9 @@ public class MenuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteUserActionPerformed
 
     private void updateLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLoanActionPerformed
-        // TODO add your handling code here:
+        ListLoansScreen listLoansScreen = new ListLoansScreen(loanController, userController, bookController, desktop, LoanOptions.UPDATE);
+        listLoansScreen.setVisible(true);
+        desktop.add(listLoansScreen);
     }//GEN-LAST:event_updateLoanActionPerformed
 
     private void updateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserActionPerformed
@@ -237,7 +255,9 @@ public class MenuScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_getUsersActionPerformed
 
     private void deleteLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLoanActionPerformed
-        // TODO add your handling code here:
+         ListLoansScreen listLoansScreen = new ListLoansScreen(loanController, userController, bookController, desktop, LoanOptions.DELETE);
+        listLoansScreen.setVisible(true);
+        desktop.add(listLoansScreen);
     }//GEN-LAST:event_deleteLoanActionPerformed
 
     private void addBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookActionPerformed
@@ -262,6 +282,17 @@ public class MenuScreen extends javax.swing.JFrame {
         GetBooksScreen getBooksScreen = new GetBooksScreen(bookController);
         getBooksScreen.setVisible(true);
     }//GEN-LAST:event_getBooksActionPerformed
+
+    private void newLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLoanActionPerformed
+        NewLoanScreen newLoanScreen = new NewLoanScreen(loanController, userController, bookController);
+        newLoanScreen.setVisible(true);
+        desktop.add(newLoanScreen);
+    }//GEN-LAST:event_newLoanActionPerformed
+
+    private void getLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLoansActionPerformed
+        GetLoansScreen getLoansScreen = new GetLoansScreen(loanController);
+        getLoansScreen.setVisible(true);
+    }//GEN-LAST:event_getLoansActionPerformed
 
     /**
      * @param args the command line arguments

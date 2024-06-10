@@ -91,6 +91,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Novo emprestimo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newLoanActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="updateLoan">
               <Properties>
@@ -112,6 +115,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listar emprestimo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getLoansActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
