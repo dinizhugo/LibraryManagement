@@ -18,7 +18,7 @@ public class DevolutionController {
     private final DevolutionService devolutionService = new DevolutionService();
 
     public void addDevolution(Loan loan, LocalDate returnDate) throws UninformedParameterException, LoanAlreadyReturned {
-        if (loan == null && returnDate == null) {
+        if (loan == null || returnDate == null) {
             throw new UninformedParameterException();
         }
 
@@ -68,7 +68,7 @@ public class DevolutionController {
         return devolutionService.getAllDevolution();
     }
 
-    private double calculateLateFee(LocalDate returnDate, LocalDate estimatedReturnDate) throws UninformedParameterException {
+    public double calculateLateFee(LocalDate returnDate, LocalDate estimatedReturnDate) throws UninformedParameterException {
         if (returnDate == null && estimatedReturnDate == null) {
             throw new UninformedParameterException();
         }

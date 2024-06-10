@@ -5,12 +5,14 @@
 package com.library.view;
 
 import com.library.controller.BookController;
+import com.library.controller.DevolutionController;
 import com.library.controller.LoanController;
 import com.library.controller.UserController;
 import com.library.view.books.AddBookScreen;
 import com.library.view.books.BookOptions;
 import com.library.view.books.GetBooksScreen;
 import com.library.view.books.ListBooksScreen;
+import com.library.view.devolution.ReturnBookScreen;
 import com.library.view.loans.GetLoansScreen;
 import com.library.view.loans.ListLoansScreen;
 import com.library.view.loans.LoanOptions;
@@ -28,6 +30,8 @@ public class MenuScreen extends javax.swing.JFrame {
     private final LoanController loanController = new LoanController();
     private final UserController userController = new UserController();
     private final BookController bookController = new BookController();
+    private final DevolutionController devolutionController = new DevolutionController();
+    
     public MenuScreen() {
         initComponents();
     }
@@ -190,6 +194,11 @@ public class MenuScreen extends javax.swing.JFrame {
         Devolution.setText("Devoluçoes");
 
         newDevolution.setText("Devolver livro");
+        newDevolution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newDevolutionActionPerformed(evt);
+            }
+        });
         Devolution.add(newDevolution);
 
         updateDevolution.setText("Atualizar devoluçao");
@@ -293,6 +302,12 @@ public class MenuScreen extends javax.swing.JFrame {
         GetLoansScreen getLoansScreen = new GetLoansScreen(loanController);
         getLoansScreen.setVisible(true);
     }//GEN-LAST:event_getLoansActionPerformed
+
+    private void newDevolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDevolutionActionPerformed
+        ReturnBookScreen returnBookScreen = new ReturnBookScreen(loanController, devolutionController);
+        returnBookScreen.setVisible(true);
+        desktop.add(returnBookScreen);
+    }//GEN-LAST:event_newDevolutionActionPerformed
 
     /**
      * @param args the command line arguments
