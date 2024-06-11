@@ -13,6 +13,7 @@ import com.library.view.books.BookOptions;
 import com.library.view.books.GetBooksScreen;
 import com.library.view.books.ListBooksScreen;
 import com.library.view.devolution.DevolutionOptions;
+import com.library.view.devolution.GetDevolutionsScreen;
 import com.library.view.devolution.ListDevolutionScreen;
 import com.library.view.devolution.ReturnBookScreen;
 import com.library.view.loans.GetLoansScreen;
@@ -69,9 +70,11 @@ public class MenuScreen extends javax.swing.JFrame {
         updateDevolution = new javax.swing.JMenuItem();
         deleteDevolution = new javax.swing.JMenuItem();
         getDevolutions = new javax.swing.JMenuItem();
+        moreDetail = new javax.swing.JMenu();
+        menuCredits = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciador de Livros");
+        setTitle("Gerenciador de Biblioteca");
         setResizable(false);
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -220,9 +223,26 @@ public class MenuScreen extends javax.swing.JFrame {
         Devolution.add(deleteDevolution);
 
         getDevolutions.setText("Listar devoluçoes");
+        getDevolutions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getDevolutionsActionPerformed(evt);
+            }
+        });
         Devolution.add(getDevolutions);
 
         jMenuBar1.add(Devolution);
+
+        moreDetail.setText("Mais");
+
+        menuCredits.setText("Creditos");
+        menuCredits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCreditsActionPerformed(evt);
+            }
+        });
+        moreDetail.add(menuCredits);
+
+        jMenuBar1.add(moreDetail);
 
         setJMenuBar(jMenuBar1);
 
@@ -333,6 +353,16 @@ public class MenuScreen extends javax.swing.JFrame {
         desktop.add(listDevolutionScreen);
     }//GEN-LAST:event_deleteDevolutionActionPerformed
 
+    private void getDevolutionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getDevolutionsActionPerformed
+        GetDevolutionsScreen getDevolutionsScreen = new GetDevolutionsScreen(devolutionController);
+        getDevolutionsScreen.setVisible(true);
+    }//GEN-LAST:event_getDevolutionsActionPerformed
+
+    private void menuCreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCreditsActionPerformed
+        Credits credits = new Credits();
+        credits.setVisible(true);
+    }//GEN-LAST:event_menuCreditsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,6 +415,8 @@ public class MenuScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem getLoans;
     private javax.swing.JMenuItem getUsers;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuCredits;
+    private javax.swing.JMenu moreDetail;
     private javax.swing.JMenuItem newDevolution;
     private javax.swing.JMenuItem newLoan;
     private javax.swing.JMenuItem updateBook;

@@ -1,9 +1,13 @@
 package com.library.controller;
 
+import com.library.exceptions.UnableToDeleteUser;
 import com.library.exceptions.UninformedParameterException;
 import com.library.exceptions.UserAlreadyExistsException;
 import com.library.exceptions.UserNotFoundException;
+import com.library.model.entities.Loan;
+import com.library.model.entities.LoanStatus;
 import com.library.model.entities.User;
+import com.library.model.service.LoanService;
 import com.library.model.service.UserService;
 
 import java.util.List;
@@ -38,7 +42,10 @@ public class UserController {
         userService.updateUser(user);
     }
 
-    public void deleteUser(Integer id) {
+    public void deleteUser(Integer id) throws UserNotFoundException, UnableToDeleteUser {
+        if (thisUserHasALoan(id)) {
+            throw new UnableToDeleteUser();
+        }
         userService.deleteUserById(id);
     }
 
@@ -57,5 +64,17 @@ public class UserController {
 
     public boolean isThereAUser(String email) {
         return getUsers().stream().anyMatch(user -> Objects.equals(user.getEmail(), email));
+    }
+
+    private boolean thisUserHasALoan(Integer id) throws UserNotFoundException {
+        User user = getUser(id);
+
+        if (user != null) {
+            LoanService loanService = new LoanService();
+            List<Loan> loans = loanService.getLoanByUser(user).stream().filter(loan -> loan.getLoanStatus() == LoanStatus.NOT_RETURNED).toList();
+
+            return !loans.isEmpty();
+        }
+        return false;
     }
 }

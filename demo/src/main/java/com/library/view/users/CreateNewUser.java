@@ -137,7 +137,7 @@ public class CreateNewUser extends javax.swing.JInternalFrame {
             String phone = txtPhone.getText();
             String address = txtAddress.getText();
             
-            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty()) {
+            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || phone.length() > 20) {
                 userController.createNewUser(null, null, null, null);
             } else {
                 userController.createNewUser(name, email, phone, address);

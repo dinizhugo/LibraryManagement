@@ -65,7 +65,7 @@ public class UserTests {
         Integer id = (controller.getUsers().stream().filter(u -> Objects.equals(u.getName(), name)).findFirst().get().getId());
         User user = assertDoesNotThrow(() -> controller.getUser(id));
 
-        controller.deleteUser(user.getId());
+        assertDoesNotThrow(() -> controller.deleteUser(user.getId()));
         assertThrows(UserNotFoundException.class, () -> controller.getUser(id));
     }
 }

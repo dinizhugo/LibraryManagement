@@ -3,10 +3,12 @@ com\library\view\loans\NewLoanScreen$2.class
 com\library\view\books\UpdateBook.class
 com\library\view\devolution\ListDevolutionScreen$2.class
 com\library\view\MenuScreen.class
+com\library\exceptions\UnableToDeleteUser.class
 com\library\view\MenuScreen$16.class
 com\library\view\loans\GetLoansScreen.class
 com\library\view\MenuScreen$4.class
 com\library\view\users\ListUsersScreen.class
+com\library\view\Credits$1.class
 com\library\view\books\BookOptions.class
 com\library\view\books\ListBooksScreen$2.class
 com\library\view\books\UpdateBook$3.class
@@ -25,7 +27,9 @@ com\library\view\users\ListUsersScreen$2.class
 com\library\view\devolution\UpdateDevolutionScreen$1.class
 com\library\view\devolution\ListDevolutionScreen.class
 com\library\view\devolution\ListDevolutionScreen$1.class
+com\library\view\devolution\GetDevolutionsScreen.class
 com\library\view\MenuScreen$6.class
+com\library\view\Credits.class
 com\library\view\MenuScreen$13.class
 com\library\view\users\GetUsersScreen.class
 com\library\view\devolution\UpdateDevolutionScreen.class
@@ -43,9 +47,12 @@ com\library\view\loans\NewLoanScreen$1.class
 com\library\view\loans\ListLoansScreen.class
 com\library\view\books\UpdateBook$2.class
 com\library\view\loans\NewLoanScreen.class
+com\library\view\devolution\GetDevolutionsScreen$1.class
 com\library\view\books\AddBookScreen$1.class
+com\library\view\MenuScreen$18.class
 com\library\view\devolution\DevolutionOptions.class
 com\library\view\MenuScreen$8.class
+com\library\exceptions\UnableToDeleteBook.class
 com\library\view\loans\UpdateLoan.class
 com\library\view\books\GetBooksScreen$1.class
 com\library\exceptions\ImpossibleToDeleteTheLoanException.class
@@ -61,6 +68,7 @@ com\library\view\loans\LoanOptions.class
 com\library\view\books\UpdateBook$1.class
 com\library\view\books\AddBookScreen$3.class
 com\library\view\devolution\ReturnBookScreen$1.class
+com\library\view\MenuScreen$17.class
 com\library\view\MenuScreen$10.class
 com\library\view\loans\UpdateLoan$2.class
 com\library\view\loans\NewLoanScreen$3.class

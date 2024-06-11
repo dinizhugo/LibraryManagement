@@ -143,7 +143,7 @@ public class UpdateUser extends javax.swing.JInternalFrame {
             String phone = txtPhone.getText();
             String address = txtAddress.getText();
             
-            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty()) {
+            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || phone.length() > 20) {
                 userController.updateUser(user, null, null, null, null);
             } else {
                 userController.updateUser(user, name, email, phone, address);
