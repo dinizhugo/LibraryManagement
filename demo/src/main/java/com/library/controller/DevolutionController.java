@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.exceptions.DateBeforeLoanDateException;
 import com.library.exceptions.DevolutionNotFoundException;
 import com.library.exceptions.LoanAlreadyReturned;
 import com.library.exceptions.UninformedParameterException;
@@ -22,7 +23,7 @@ public class DevolutionController {
             throw new UninformedParameterException();
         }
 
-        if (loan != null && loan.getLoanStatus() == LoanStatus.RETURNED) {
+        if (loan.getLoanStatus() == LoanStatus.RETURNED) {
             throw new LoanAlreadyReturned();
         }
 
@@ -31,18 +32,21 @@ public class DevolutionController {
         devolutionService.addDevolution(new Devolution(null, loan, returnDate, trafficTicket));
     }
 
-    public void updateDevolution(Devolution devolution, Loan loan, LocalDate returnDate) throws UninformedParameterException {
-        if (devolution == null && loan == null && returnDate == null) {
+    public void updateDevolution(Devolution devolution, LocalDate returnDate, double trafficTicket) throws UninformedParameterException, DateBeforeLoanDateException {
+        if (devolution == null || returnDate == null) {
             throw new UninformedParameterException();
         }
+
+        if (returnDate.isBefore(devolution.getLoan().getLoanDate())) {
+            throw new DateBeforeLoanDateException();
+        }
         devolution.setReturnDate(returnDate);
-        devolution.setLoan(loan);
-        double trafficTicket = calculateLateFee(returnDate, loan.getEstimatedDate());
         devolution.setTrafficTicket(trafficTicket);
         devolutionService.updateDevolution(devolution);
     }
 
-    public void deleteDevolution(Integer id) {
+    public void deleteDevolution(Integer id) throws DevolutionNotFoundException {
+        deleteLoan(id);
         devolutionService.deleteDevolutionById(id);
     }
 
@@ -85,5 +89,11 @@ public class DevolutionController {
         book.setAmount(currentAmount + 1);
         bookService.updateBook(book);
         loanService.updateLoan(loan);
+    }
+
+    private void deleteLoan(Integer id) throws DevolutionNotFoundException {
+        LoanService loanService = new LoanService();
+        Loan loan = getDevolutionById(id).getLoan();
+        loanService.deleteLoanById(loan.getId());
     }
 }

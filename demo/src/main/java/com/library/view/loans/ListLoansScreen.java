@@ -5,11 +5,14 @@
 package com.library.view.loans;
 
 import com.library.controller.BookController;
+import com.library.controller.DevolutionController;
 import com.library.controller.LoanController;
 import com.library.controller.UserController;
 import com.library.exceptions.ImpossibleToDeleteTheLoanException;
 import com.library.exceptions.LoanNotFoundException;
+import com.library.model.entities.Devolution;
 import com.library.model.entities.Loan;
+import com.library.view.devolution.DevolutionOptions;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +24,7 @@ public class ListLoansScreen extends javax.swing.JInternalFrame {
     private final UserController userController;
     private final BookController bookController;
     private final LoanOptions loanOptions;
-    private javax.swing.JDesktopPane desktop;
+    private final javax.swing.JDesktopPane desktop;
     private final List<Loan> loans;
     
     public ListLoansScreen(LoanController loanController, UserController userController, BookController bookController ,javax.swing.JDesktopPane desktop, LoanOptions loanOptions) {
@@ -150,7 +153,7 @@ public class ListLoansScreen extends javax.swing.JInternalFrame {
     }
     
     private void selectOption(Loan loan, LoanController loanController1, LoanOptions options, javax.swing.JDesktopPane desktop) {
-        if (options == LoanOptions.UPDATE) {
+        if (options == loanOptions.UPDATE) {
             UpdateLoan updateLoan = new UpdateLoan(loanController, userController, bookController, loan, desktop);
             updateLoan.setVisible(true);
             desktop.add(updateLoan);

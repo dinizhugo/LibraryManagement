@@ -12,6 +12,8 @@ import com.library.view.books.AddBookScreen;
 import com.library.view.books.BookOptions;
 import com.library.view.books.GetBooksScreen;
 import com.library.view.books.ListBooksScreen;
+import com.library.view.devolution.DevolutionOptions;
+import com.library.view.devolution.ListDevolutionScreen;
 import com.library.view.devolution.ReturnBookScreen;
 import com.library.view.loans.GetLoansScreen;
 import com.library.view.loans.ListLoansScreen;
@@ -202,9 +204,19 @@ public class MenuScreen extends javax.swing.JFrame {
         Devolution.add(newDevolution);
 
         updateDevolution.setText("Atualizar devoluçao");
+        updateDevolution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateDevolutionActionPerformed(evt);
+            }
+        });
         Devolution.add(updateDevolution);
 
         deleteDevolution.setText("Deletar devoluçao");
+        deleteDevolution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDevolutionActionPerformed(evt);
+            }
+        });
         Devolution.add(deleteDevolution);
 
         getDevolutions.setText("Listar devoluçoes");
@@ -308,6 +320,18 @@ public class MenuScreen extends javax.swing.JFrame {
         returnBookScreen.setVisible(true);
         desktop.add(returnBookScreen);
     }//GEN-LAST:event_newDevolutionActionPerformed
+
+    private void updateDevolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDevolutionActionPerformed
+        ListDevolutionScreen listDevolutionScreen = new ListDevolutionScreen(devolutionController, desktop, DevolutionOptions.UPDATE);
+        listDevolutionScreen.setVisible(true);
+        desktop.add(listDevolutionScreen);
+    }//GEN-LAST:event_updateDevolutionActionPerformed
+
+    private void deleteDevolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDevolutionActionPerformed
+        ListDevolutionScreen listDevolutionScreen = new ListDevolutionScreen(devolutionController, desktop, DevolutionOptions.DELETE);
+        listDevolutionScreen.setVisible(true);
+        desktop.add(listDevolutionScreen);
+    }//GEN-LAST:event_deleteDevolutionActionPerformed
 
     /**
      * @param args the command line arguments

@@ -3,7 +3,9 @@ C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\ListBooksScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\DevolutionNotFoundException.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Loan.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\devolution\UpdateDevolutionScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\implementation\BookJDBC.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\devolution\ListDevolutionScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\loans\NewLoanScreen.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\InsufficientBooksExceptions.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\implementation\LoanJDBC.java
@@ -27,6 +29,7 @@ C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\books\BookOptions.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\controller\UserController.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Book.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\DateBeforeLoanDateException.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\loans\LoanOptions.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\loans\UpdateLoan.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\Devolution.java
@@ -37,6 +40,7 @@ C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\entities\LoanStatus.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\controller\DevolutionController.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\LoanNotFoundException.java
+C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\view\devolution\DevolutionOptions.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\service\LoanService.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\exceptions\ImpossibleToDeleteTheLoanException.java
 C:\Users\Hugo Diniz\Documents\CursoJava\LibraryManagement\demo\src\main\java\com\library\model\dao\DevolutionDao.java
