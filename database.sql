@@ -1,0 +1,60 @@
+CREATE TABLE `books` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`titulo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`autor` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`editora` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`quantidade` INT(10) NOT NULL,
+	`categoria` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`data_publicacao` DATE NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+CREATE TABLE `users` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`email` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`phone` VARCHAR(20) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`address` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `email` (`email`) USING BTREE
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+CREATE TABLE `loans` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`id_user` INT(10) NOT NULL,
+	`id_book` INT(10) NOT NULL,
+	`loan_date` DATE NOT NULL,
+	`estimated_date` DATE NOT NULL,
+	`status` ENUM('RETURNED','NOT_RETURNED') NOT NULL DEFAULT 'NOT_RETURNED' COLLATE 'utf8mb4_0900_ai_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `id_user` (`id_user`) USING BTREE,
+	INDEX `id_book` (`id_book`) USING BTREE,
+	CONSTRAINT `id_book` FOREIGN KEY (`id_book`) REFERENCES `books` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+	CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+CREATE TABLE `devolution` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`id_loan` INT(10) NOT NULL,
+	`return_date` DATE NOT NULL,
+	`traffic_ticket` DECIMAL(10,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `loanId` (`id_loan`) USING BTREE,
+	CONSTRAINT `loanId` FOREIGN KEY (`id_loan`) REFERENCES `loans` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
